@@ -32,7 +32,9 @@ public class ExamenArraysStrings {
 		fraseReal=eligeFrase();
 		
 		//Codificamos la frase
+		fraseCodificada = codificaFrase();
 		
+		System.out.println(fraseCodificada);
 	}
 	
 	static void desordenaAbecedario(){
@@ -77,5 +79,32 @@ public class ExamenArraysStrings {
 		frase = frases[numR];
 		
 		return frase;	
+	}
+	
+	static String codificaFrase() {
+		//Frase codificada
+		String fraseCoded = "";
+		
+		//Contador para la busqueda
+		int cont = 0;
+		
+		//Recorremos la frase sustituyendo la letra por la posición en el abecedario
+		for (int i = 0; i < fraseReal.length(); i++) {
+			for (int j = 0; j < abecedario.length; j++) {
+				while (abecedario[j][cont] != fraseReal.charAt(i)) {
+					if (fraseReal.charAt(i) == abecedario[j][cont]) {
+						fraseCoded += j + " ";
+						fraseCoded += cont + " ";
+					}
+					cont++;
+				}
+				cont = 0;
+			}
+			
+		}
+		
+		
+		
+		return fraseCoded;
 	}
 }
