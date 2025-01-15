@@ -10,6 +10,8 @@ public class TresEnRaya {
 
 	// objeto random
 	static Random rd = new Random();
+	
+	static int movimientos = 0;
 
 	public static void main(String[] args) {
 
@@ -17,7 +19,7 @@ public class TresEnRaya {
 		int turno;
 
 		// Booleano para ver si el tablero está lleno
-		boolean lleno = false;
+		final int LLENO = 9;
 
 		// posicion filas usuario
 		int posiFU = 0;
@@ -50,7 +52,7 @@ public class TresEnRaya {
 			// damos la bienvenida
 			System.out.println("¡BIENVENIDOS AL TRES EN RAYA!");
 
-			while (!win || !lleno) {
+			while (LLENO != movimientos) {
 				// Si el turno es 1 juega la maquina, si es 0 juega el jugador
 				if (turno == 1) {
 					System.out.println("Turno de la máquina");
@@ -58,11 +60,14 @@ public class TresEnRaya {
 					// la maquina pone ficha
 					mueveFichaAleatoria();
 
+					movimientos++;
+					
 					// imprimimos el tablero
 					imprimeTablero();
 
 					// Comprobamos si alguien ha ganado
 					win = esGanador('X');
+					
 					
 					//decimos quien gana
 					if (win) {
@@ -128,6 +133,8 @@ public class TresEnRaya {
 					// la maquina pone ficha
 					mueveFichaAleatoria();
 
+					movimientos++;
+					
 					// imprimimos el tablero
 					imprimeTablero();
 
@@ -144,7 +151,7 @@ public class TresEnRaya {
 				for (int i = 0; i < tablero.length; i++) {
 					for (int j = 0; j < tablero[0].length; j++) {
 						if (tablero[i][j] == '-') {
-							lleno = true;
+							LLENO = false;
 						}
 					}
 				}
@@ -235,6 +242,8 @@ public class TresEnRaya {
 			tablero[posiFU][posiCU] = 'O';
 			valid = true;
 		}
+		
+		
 
 		// devolvemos si hay algo en medio o no
 		return valid;
@@ -291,6 +300,7 @@ public class TresEnRaya {
 			}
 			limpia = false;
 		}
+		1
 		
 		
 		return limpia;
