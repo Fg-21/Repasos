@@ -2,10 +2,11 @@ package examenes;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class TresEnRaya {
 	// tablero
-	static char[][] tablero = new char[9][9];
+	static char[][] tablero = new char[3][3];
 
 	// objeto random
 	static Random rd = new Random();
@@ -15,33 +16,83 @@ public class TresEnRaya {
 		// turnos de jugador
 		int turno;
 
-		// Decidmos quien empieza a jugar
-		turno = jugadorInicial();
+		// Booleano para ver si el tablero está lleno
+		boolean lleno;
 
-		// rellenamos el tablero con -
-		for (int i = 0; i < tablero.length; i++) {
-			Arrays.fill(tablero[i], '-');
+		// posicion filas usuario
+		int posiFU = 0;
+
+		// posición columna usuario
+		int posiCU = 0;
+
+		// caracter que para la victoria
+		char caracter;
+
+		// Scanner
+		Scanner sc = new Scanner(System.in);
+
+		// se sigue jugando hasta que uno de los 2 gane o se complete el tablero
+		while (limpiaTablero()) {
+			// Decidmos quien empieza a jugar
+			turno = jugadorInicial();
+
+			// rellenamos el tablero con -
+			for (int i = 0; i < tablero.length; i++) {
+				Arrays.fill(tablero[i], '-');
+			}
+
+			// damos la bienvenida
+			System.out.println("¡BIENVENIDOS AL TRES EN RAYA!");
+
+			while (!esGanador(caracter) || !lleno) {
+				// Si el turno es 1 juega la maquina, si es 0 juega el jugador
+				if (turno == 1) {
+					System.out.println("Turno de la máquina");
+
+					// la maquina pone ficha
+					mueveFichaAleatoria();
+
+					// imprimimos el tablero
+					imprimeTablero();
+
+					// Comprobamos si alguien ha ganado
+					esGanador(caracter);
+
+				} else {
+					System.out.println("Tu turno!");
+
+					do {
+						// imprimimos el tablero
+						imprimeTablero();
+
+						// preguntamos al usuario la fila y la columna que quiere modificar
+						System.out.println("Fila");
+						posiFU = sc.nextInt();
+
+						System.out.println("Columna");
+						posiCU = sc.nextInt();
+
+						// usuario mueve ficha
+						usuarioMueveFicha(posiFU, posiCU);
+
+					} while (usuarioMueveFicha(posiFU, posiCU));
+
+					// Comprobamos si alguien ha ganado
+					esGanador(caracter);
+
+				}
+
+				// Comprobamos si el tablero está relleno recorriendolo
+				for (int i = 0; i < tablero.length; i++) {
+					for (int j = 0; j < tablero[0].length; j++) {
+						if (tablero[i][j] == '-') {
+							lleno = true;
+						}
+					}
+				}
+
+			}
 		}
-		
-		//damos la bienvenida
-		System.out.println("¡BIENVENIDOS AL TRES EN RAYA!");
-		
-		// imprimimos el tablero
-		imprimeTablero();
-
-		// Si el turno es 1 juega la maquina, si es 0 juega el jugador
-		if (turno == 1) {
-			System.out.println("Turno de la máquina");
-			mueveFichaAleatoria();
-		} else {
-			System.out.println("Tu turno!");
-			usuarioMueveFicha();
-		}
-
-		// se sigue jugando hasta que uno de los 2 gane
-		// while ( ) {
-
-		// }
 
 	}
 
@@ -51,7 +102,7 @@ public class TresEnRaya {
 		System.out.print("\t");
 		// filas de coordenadas
 		for (int i = 0; i < tablero.length; i++) {
-			
+
 			System.out.print(i + "\t");
 		}
 		System.out.println();
@@ -101,7 +152,25 @@ public class TresEnRaya {
 
 	}
 
-	static void usuarioMueveFicha() {
+	static boolean usuarioMueveFicha(int posiFU, int posiCU) {
+		boolean valid = false;
 
+		// vemos si no hay nada en medio para poner la ficha
+		if (tablero[posiFU][posiCU] == '-') {
+			// ponemos en el tablero un círculo en las coordenadas especificadas
+			tablero[posiFU][posiCU] = 'O';
+			valid = true;
+		}
+
+		// devolvemos si hay algo en medio o no
+		return valid;
+	}
+
+	static boolean esGanador(char caracter) {
+		// variable para ver si has ganado o no
+		boolean win = false;
+
+		// devolvemos la posible victoria
+		return win;
 	}
 }
