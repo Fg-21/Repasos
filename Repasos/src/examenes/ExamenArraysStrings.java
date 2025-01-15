@@ -10,9 +10,13 @@ public class ExamenArraysStrings {
 
 	// Frases con las que vamos a jugar
 	static String frases[] = {
-			"las guerras seguiran mientras el color de la piel siga siendo mas importante que el de los ojos",
-			"aprende a vivir y sabras morir bien", "cada dia sabemos mas y entendemos menos",
-			"el dinero no puede comprar la vida", "la verdadera sabiduria esta en reconocer la propia ignorancia" };
+			// "las guerras seguiran mientras el color de la piel siga siendo mas importante
+			// que el de los ojos",
+			// "aprende a vivir y sabras morir bien", "cada dia sabemos mas y entendemos
+			// menos",
+			// "el dinero no puede comprar la vida", "la verdadera sabiduria esta en
+			// reconocer la propia ignorancia"
+			"hola" };
 
 	// Frase con la que se juega
 	static String fraseReal;
@@ -29,16 +33,13 @@ public class ExamenArraysStrings {
 	public static void main(String[] args) {
 
 		// Variable para la letra del usuario
-		String letra;
+		char letra;
 
 		// Variable para la comprobación del código
 		boolean check = false;
-		
-		// Variable para la comprobación de victoria
-		boolean win = false;
-		
-		//Código de una letra
-		
+
+		// Código
+		int code;
 
 		// Desordenamos el array del abecedario
 		desordenaAbecedario();
@@ -50,10 +51,14 @@ public class ExamenArraysStrings {
 		fraseCodificada = codificaFrase();
 
 		// Pedimos al usuario que adivine una letra del códico hasta que lo adivine
-		while (win) {
+		while (!sonIguales()) {
+
+			// Pedimos datos al usuario
 			System.out.println(fraseCodificada);
+			System.out.println("Codigo");
+			code = rd.nextInt();
 			System.out.println("Di una letra para adivinar la frase");
-			letra = rd.next();
+			letra = rd.next().charAt(0);
 
 			// Comprobamos si la letra está en la frase
 			check = compruebaCódigo(code, letra);
@@ -61,16 +66,17 @@ public class ExamenArraysStrings {
 			// Si está, le decimos que ha acertado, si no, le decimos que ha fallado
 			if (check) {
 				System.out.println("Acertaste!");
+
 			} else {
 				System.out.println("Has fallado!");
 			}
-			
-			//Comprobamos si el jugador ha ganado
-			win = sonIguales();
 		}
-		
-		//Damos la enhorabuena al jugador
+
+		// Damos la enhorabuena al jugador
 		System.out.println("¡HAS GANADO, ENHORABUENA!");
+		
+		//Cerramos scanner
+		rd.close();
 	}
 
 	static void desordenaAbecedario() {
@@ -148,12 +154,67 @@ public class ExamenArraysStrings {
 	}
 
 	// Metodo comprobar código
-	static boolean compruebaCódigo(String letra) {
+	static boolean compruebaCódigo(int code, char letra) {
 		// Booleano a retornar
-		boolean flag;
-		
-		
-		
+		boolean flag = false;
+
+		// Valor de las i
+		int i;
+
+		// Valor de las j
+		int j;
+
+		// cadena para el code
+		String codeString = "";
+
+		// cadena para la letra
+		String letraString = "";
+
+		// Obtenemos las posiciones x e y de la tabla abecedario
+		i = code / 10;
+		j = code % 10;
+
+		// Comprobamos si esta la letra
+		if (abecedario[i][j] == letra) {
+			flag = true;
+		}
+
+		// para números
+		if (code < 9) {
+			codeString += "0";
+			// codeString += Integer.toString(code);
+		}
+		codeString += code;
+		letraString = Character.toString(letra);
+
+		// Reemplazamos la letra en la frase si ha acertado
+		if (flag) {
+			fraseCodificada = fraseCodificada.replace(codeString, letraString);
+		}
+		codeString = "";
 		return flag;
+	}
+
+	// soniguales
+	static boolean sonIguales() {
+		boolean check;
+
+		// backup frase real
+		String backUpFraseReal = fraseReal;
+
+		// backup frase coded
+		String backUpFraseCodificada = fraseCodificada;
+		
+		//quitamos espacios
+		backUpFraseCodificada =backUpFraseCodificada.replace(" ", "");
+		
+		//quitamos espacios
+		backUpFraseReal =backUpFraseReal.replace(" ", "");
+
+		//comprobamos si son iguales
+		check = backUpFraseReal.equals(backUpFraseCodificada);
+		
+		//devolvemos el resultado de la comprobación
+		return check;
 	}
 }
