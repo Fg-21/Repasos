@@ -151,7 +151,7 @@ public class TresEnRaya {
 				for (int i = 0; i < tablero.length; i++) {
 					for (int j = 0; j < tablero[0].length; j++) {
 						if (tablero[i][j] == '-') {
-							LLENO = false;
+							//LLENO = false;
 						}
 					}
 				}
@@ -300,7 +300,7 @@ public class TresEnRaya {
 			}
 			limpia = false;
 		}
-		1
+		
 		
 		
 		return limpia;
