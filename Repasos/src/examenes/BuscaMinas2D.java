@@ -67,6 +67,7 @@ public class BuscaMinas2D {
 
 			jugada(posiFilas, posiColumnas);
 			turno++;
+			
 		} while (jugada(posiFilas, posiColumnas) && turno < 19);
 		
 		if(!jugada(posiFilas, posiColumnas)) {
@@ -93,13 +94,22 @@ public class BuscaMinas2D {
 	}
 
 	static void pintaTablero() {
+		//indices
+		
+		System.out.print("\t");
+		for (int i = 0; i < tableroUser.length; i++) {
+			System.out.print(i + "\t");
+		}
+		System.out.println();
+		
 		// recorremos el tablero para pintarlo
 		for (int i = 0; i < tableroUser.length; i++) {
+			System.out.print(i + "\t");
 			for (int j = 0; j < tableroUser[0].length; j++) {
 				System.out.print(tableroUser[i][j] + "\t");
 			}
-			System.out.println("");
-			System.out.println("");
+			System.out.println();
+			System.out.println();
 
 		}
 	}
