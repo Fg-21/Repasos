@@ -1,0 +1,113 @@
+interface Velocidad
+ + subeVelocidad()
+ + bajaVelocidad()
+
+interface Volumen
+ + subirVolumen()
+ + bajarVolumen()
+
+class Mando implements Comparable<Mando>
+ - String modelo
+ - double altura
+ - double anchura
+ - double precio
+ - boolean onOff
+ 
+ + Mando(String modelo, double altura, double anchura, boolean onOff)
+ + Mando(String modelo, double altura, double anchura, boolean onOff, double precio)
+ 
+ + getModelo()
+ + getAltura()
+ + getAnchura()
+ + getPrecio
+ + isOnOff()
+ 
+ + setPrecio()
+ 
+ + cambiarEstado()
+ 
+ @Overrride
+ + equals()
+ + compareTo()
+ + toString()
+ 
+
+class MandoTV extends Mando implements Volumen, Comparable<Mando> 
+ - int canal = 1
+ - int volumen = 0
+ 
+ + MandoTV(String modelo, double altura, double anchura, boolean onOff, int canal, int volumen)
+ + MandoTV(String modelo, double altura, double anchura, boolean onOff, int canal, int volumen, double precio)
+ 
+ + getCanal()
+ + getVolumen()
+ 
+ + cambiarCanal(int canal)
+ 
+ @Overrride
+ + subirVolumen()
+ + bajarVolumen()
+ + compareTo()
+ + toString()
+ 
+class MandoMiniCadenas extends Mando implements Volumen, Comparable<Mando>
+ - int volumen = 0
+ 
+ + MandoMinicadenas(String modelo, double altura, double anchura, boolean onOff, int volumen)
+ + MandoMinicadenas(String modelo, double altura, double anchura, boolean onOff, int volumen, double precio)
+
+ + getVolumen()	
+
+ @Overrride
+ + subirVolumen()
+ + bajarVolumen()
+ + compareTo()
+ + toString()
+ 
+class MandoAspiradora extends Mando implements Velocidad, Comparable<Mando>
+ - int velocidadAspiracion = 0
+ + MandoAspiradora(String modelo, double altura, double anchura, boolean onOff, int velocidadAspiracion)
+ + MandoAspiradora(String modelo, double altura, double anchura, boolean onOff, int velocidadAspiracion, double precio)
+ 
+ + getVelocidadAspiracion()
+ 
+ @Override
+ + subeVelocidad()
+ + bajaVelocidad()
+ + compareTo()
+ + toString()
+ 
+class MandoAire extends Mando implements Velocidad, Comparable<Mando>
+ - boolean modo = false
+ - int temperatura
+ - int velocidadVentilador = 0
+ 
+ + MandoAire(String modelo, double altura, double anchura, boolean onOff, boolean modo, int temperatura, int velocidadVentilador)
+ + MandoAire(String modelo, double altura, double anchura, boolean onOff, boolean modo, int temperatura, int velocidadVentilador, double precio)
+  
+ + getModo()
+ + getTemperatura()
+ + getVelocidadVentilador()
+ 
+ + cambiarModo()
+ + cambiarTemperatura()
+  
+  @Override
+ + subeVelocidad()
+ + bajaVelocidad()
+ + compareTo()
+ + toString()
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
